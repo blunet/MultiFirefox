@@ -16,11 +16,11 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 @implementation MFF
 
 // Open the profiles window
-+ (void)openFirefoxProfilesWindow:(NSString *)version
++ (void)openFirefoxProfilesWindow:(NSString *)version newInstance:(BOOL)force
 {
     NSLog(@"version: %@", version);
     
-    NSString *toBeCalled = [[@"open \"" stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"\" --args --profilemanager"];
+    NSString *toBeCalled = [[(force ? @"open -n \"": @"open \"") stringByAppendingString:[self getFirefoxPath:version]] stringByAppendingString: @"\" --args --profilemanager"];
     
     NSLog(@"Profile Launch call: %@", toBeCalled);
     
@@ -134,10 +134,10 @@ static const NSString* __APPLICATIONS_PATH__ = @"/Applications";
 }
 
 // Launch Firefox with the selected profile
-+ (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile
++ (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile newInstance:(BOOL)force
 {
     // Construct the command using 'open'
-    NSArray *cmdParts = [NSArray arrayWithObjects:@"open -a \"",
+    NSArray *cmdParts = [NSArray arrayWithObjects:(force ? @"open -na \"": @"open -a \""),
                          [__APPLICATIONS_PATH__ stringByAppendingPathComponent:version],
                          @".app\" --args -no-remote -P \"",
                          profile,

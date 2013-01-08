@@ -83,14 +83,17 @@ BOOL shouldReloadProfiles = NO;
     [defaults setObject:versionName forKey:@"lastVersion"];
     [defaults synchronize];
     
+    BOOL force = [defaults boolForKey:@"MFFForceNewInstance"];
+    
     NSLog(@"Version: %@ / Profile: %@", versionName, profileName);
     
-    [MFF launchFirefox:versionName withProfile:profileName];
+    [MFF launchFirefox:versionName withProfile:profileName newInstance:force];
 }
 
 -(IBAction)ShowProfileManager:(id)sender {
+    BOOL force = [[NSUserDefaults standardUserDefaults] boolForKey:@"MFFForceNewInstance"];
     shouldReloadProfiles = YES;
-    [MFF openFirefoxProfilesWindow:[self GetSelectedVersion]];
+    [MFF openFirefoxProfilesWindow:[self GetSelectedVersion] newInstance:force];
 }
 
 -(IBAction)CreateApplication:(id)sender {

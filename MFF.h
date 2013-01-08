@@ -12,11 +12,11 @@
 
 }
 
-+ (void) openFirefoxProfilesWindow:(NSString *)version;
++ (void) openFirefoxProfilesWindow:(NSString *)version newInstance:(BOOL)force;
 + (BOOL) multipleProfilesExist;
 + (NSArray *) profilesList;
 + (NSArray *) versionsList;
-+ (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile;
++ (void) launchFirefox:(NSString *)version withProfile:(NSString *)profile newInstance:(BOOL)force;
 + (NSString *) getFirefoxPath:(NSString *)version;
 + (void) createApplicationWithVersion:(NSString *)version andProfile:(NSString *)profile;
 
